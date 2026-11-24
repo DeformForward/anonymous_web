@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Anonymous supplementary material for DeformForward.">
+  <title>DeformForward | Supplementary Material</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="gallery.js"></script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap" aria-label="Sections">
+      <a class="wordmark" href="#overview">DeformForward</a>
+      <div class="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Videos</a>
+        <a href="#metrics">Metrics</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="overview" class="hero wrap" aria-label="Overview">
+      <p class="eyebrow">Anonymous supplementary material</p>
+      <h1>DeformForward</h1>
+      <p class="subtitle">Generalizable Feed-Forward Physics–Appearance Modeling for Deformable Object Manipulation</p>
+      <figure class="teaser">
+        <img src="assets/teaser.webp" alt="DeformForward future appearance predictions for a folded rope, a lifted cloth, and a stretched plush bear." width="1680" height="310">
+        <figcaption>Predicted appearance at three time points for rope, cloth and plush manipulation.</figcaption>
+      </figure>
+    </section>
+
+    <section id="abstract" class="section wrap">
+      <div class="section-title"><h2>Abstract</h2></div>
+      <div class="prose">
+        <p>Predicting deformable manipulation requires modeling how an object moves under an action and how that motion changes its appearance. DeformForward couples a Material Point Method simulator with 3D Gaussians. Learned stress, grid velocity, and grasp terms update the physical state. Particle bindings and a learned Gaussian motion residual carry this motion to the rendered surface.</p>
+        <p>The system initializes appearance from calibrated observations and updates existing Gaussians as new RGB-D frames arrive. After the observation cutoff, it predicts motion and appearance from the retained state and the supplied action trajectory. We evaluate future prediction on 12 public PhysCoRe scenes and transfer frozen models to six separately collected recordings.</p>
+      </div>
+    </section>
+
+    <section id="method" class="section wrap">
+      <div class="section-title"><h2>Method</h2></div>
+      <div>
+        <figure class="method">
+          <a href="assets/method.png" aria-label="Open full resolution method figure">
+            <img loading="lazy" src="assets/method.png" alt="Diagram of motion-based material estimation, MPM with stress and grasp corrections, Gaussian motion, and RGB-D updates during observation." width="2850" height="2370">
+          </a>
+          <figcaption>RGB-D observations update Gaussian position, scale, color, and opacity every ten observed frames. The learned appearance update and the material estimate are held at their last observed values during future rollout. The MPM state and Gaussian motion continue to evolve.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="results" class="section results wrap">
+      <div class="section-title"><h2>Results</h2></div>
+      <div class="results-heading">
+        <h3>PhysCoRe benchmark</h3>
+        <p>Twelve scenes covering rope, cloth, plush, and plasticine. DeformForward trains on the observed prefixes of these scenes and applies RGB-D refinement before the forecast cutoff.</p>
+      </div>
+      
+      <div class="gallery" data-gallery>
+        <label class="picker" hidden><span>Select a scene</span>
+          <select><option value="single_lift_rope">Rope · Center lift</option><option value="single_clift_rope">Rope · End lift</option><option value="single_push_rope">Rope · Push</option><option value="double_fold_rope">Rope · Fold</option><option value="single_lift_cloth">Cloth · Center lift</option><option value="single_clift_cloth">Cloth · One-corner lift</option><option value="double_clift_cloth" selected>Cloth · Two-corner lift</option><option value="single_lift_bear">Plush bear · One-limb lift</option><option value="double_stretch_bear">Plush bear · Stretch, recording 1</option><option value="double_stretch_bear_1">Plush bear · Stretch, recording 2</option><option value="double_squeeze_plastic">Plasticine · Squeeze</option><option value="double_stretch_plastic">Plasticine · Stretch</option></select>
+        </label>
+        
+          <details class="clip" data-clip="single_lift_rope">
+            <summary>Rope · Center lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/single_lift_rope.jpg" aria-label="Rope · Center lift · synchronized future prediction"><source src="assets/benchmark/single_lift_rope.mp4" type="video/mp4"></video>
+              <figcaption><span>Rope · Center lift</span><span>Future frames 31–70 · Camera 0</span><a href="assets/benchmark/single_lift_rope.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="single_clift_rope">
+            <summary>Rope · End lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/single_clift_rope.jpg" aria-label="Rope · End lift · synchronized future prediction"><source src="assets/benchmark/single_clift_rope.mp4" type="video/mp4"></video>
+              <figcaption><span>Rope · End lift</span><span>Future frames 71–140 · Camera 0</span><a href="assets/benchmark/single_clift_rope.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="single_push_rope">
+            <summary>Rope · Push</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/single_push_rope.jpg" aria-label="Rope · Push · synchronized future prediction"><source src="assets/benchmark/single_push_rope.mp4" type="video/mp4"></video>
+              <figcaption><span>Rope · Push</span><span>Future frames 101–210 · Camera 0</span><a href="assets/benchmark/single_push_rope.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="double_fold_rope">
+            <summary>Rope · Fold</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/double_fold_rope.jpg" aria-label="Rope · Fold · synchronized future prediction"><source src="assets/benchmark/double_fold_rope.mp4" type="video/mp4"></video>
+              <figcaption><span>Rope · Fold</span><span>Future frames 51–100 · Camera 0</span><a href="assets/benchmark/double_fold_rope.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="single_lift_cloth">
+            <summary>Cloth · Center lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/single_lift_cloth.jpg" aria-label="Cloth · Center lift · synchronized future prediction"><source src="assets/benchmark/single_lift_cloth.mp4" type="video/mp4"></video>
+              <figcaption><span>Cloth · Center lift</span><span>Future frames 81–160 · Camera 0</span><a href="assets/benchmark/single_lift_cloth.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="single_clift_cloth">
+            <summary>Cloth · One-corner lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/single_clift_cloth.jpg" aria-label="Cloth · One-corner lift · synchronized future prediction"><source src="assets/benchmark/single_clift_cloth.mp4" type="video/mp4"></video>
+              <figcaption><span>Cloth · One-corner lift</span><span>Future frames 41–80 · Camera 0</span><a href="assets/benchmark/single_clift_cloth.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="double_clift_cloth" open>
+            <summary>Cloth · Two-corner lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/double_clift_cloth.jpg" aria-label="Cloth · Two-corner lift · synchronized future prediction"><source src="assets/benchmark/double_clift_cloth.mp4" type="video/mp4"></video>
+              <figcaption><span>Cloth · Two-corner lift</span><span>Future frames 81–170 · Camera 0</span><a href="assets/benchmark/double_clift_cloth.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="single_lift_bear">
+            <summary>Plush bear · One-limb lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/single_lift_bear.jpg" aria-label="Plush bear · One-limb lift · synchronized future prediction"><source src="assets/benchmark/single_lift_bear.mp4" type="video/mp4"></video>
+              <figcaption><span>Plush bear · One-limb lift</span><span>Future frames 81–170 · Camera 0</span><a href="assets/benchmark/single_lift_bear.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="double_stretch_bear">
+            <summary>Plush bear · Stretch, recording 1</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/double_stretch_bear.jpg" aria-label="Plush bear · Stretch, recording 1 · synchronized future prediction"><source src="assets/benchmark/double_stretch_bear.mp4" type="video/mp4"></video>
+              <figcaption><span>Plush bear · Stretch, recording 1</span><span>Future frames 71–140 · Camera 0</span><a href="assets/benchmark/double_stretch_bear.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="double_stretch_bear_1">
+            <summary>Plush bear · Stretch, recording 2</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/double_stretch_bear_1.jpg" aria-label="Plush bear · Stretch, recording 2 · synchronized future prediction"><source src="assets/benchmark/double_stretch_bear_1.mp4" type="video/mp4"></video>
+              <figcaption><span>Plush bear · Stretch, recording 2</span><span>Future frames 91–190 · Camera 0</span><a href="assets/benchmark/double_stretch_bear_1.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="double_squeeze_plastic">
+            <summary>Plasticine · Squeeze</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/double_squeeze_plastic.jpg" aria-label="Plasticine · Squeeze · synchronized future prediction"><source src="assets/benchmark/double_squeeze_plastic.mp4" type="video/mp4"></video>
+              <figcaption><span>Plasticine · Squeeze</span><span>Future frames 101–210 · Camera 0</span><a href="assets/benchmark/double_squeeze_plastic.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="double_stretch_plastic">
+            <summary>Plasticine · Stretch</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/benchmark/double_stretch_plastic.jpg" aria-label="Plasticine · Stretch · synchronized future prediction"><source src="assets/benchmark/double_stretch_plastic.mp4" type="video/mp4"></video>
+              <figcaption><span>Plasticine · Stretch</span><span>Future frames 71–150 · Camera 0</span><a href="assets/benchmark/double_stretch_plastic.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+      </div>
+
+      <div class="results-heading transfer">
+        <h3>Transfer to self-collected recordings</h3>
+        <p>Six recordings of new objects with frozen model weights. The particle views compare dynamics. The rightmost panel shows our Gaussian rendering.</p>
+      </div>
+      
+      <div class="gallery" data-gallery>
+        <label class="picker" hidden><span>Select a recording</span>
+          <select><option value="1d_01">1D · Rope push</option><option value="1d_03">1D · Rope lift</option><option value="2d_01">2D · Cloth, recording 1</option><option value="2d_02">2D · Cloth, recording 2</option><option value="bear_02">3D · Plush, recording 1</option><option value="bear_03" selected>3D · Plush, recording 2</option></select>
+        </label>
+        
+          <details class="clip" data-clip="1d_01">
+            <summary>1D · Rope push</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/transfer/1d_01.jpg" aria-label="1D · Rope push · synchronized future prediction"><source src="assets/transfer/1d_01.mp4" type="video/mp4"></video>
+              <figcaption><span>1D · Rope push</span><span>Future frames 188–336 · Camera 0</span><a href="assets/transfer/1d_01.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="1d_03">
+            <summary>1D · Rope lift</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/transfer/1d_03.jpg" aria-label="1D · Rope lift · synchronized future prediction"><source src="assets/transfer/1d_03.mp4" type="video/mp4"></video>
+              <figcaption><span>1D · Rope lift</span><span>Future frames 189–382 · Camera 0</span><a href="assets/transfer/1d_03.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="2d_01">
+            <summary>2D · Cloth, recording 1</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/transfer/2d_01.jpg" aria-label="2D · Cloth, recording 1 · synchronized future prediction"><source src="assets/transfer/2d_01.mp4" type="video/mp4"></video>
+              <figcaption><span>2D · Cloth, recording 1</span><span>Future frames 241–434 · Camera 0</span><a href="assets/transfer/2d_01.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="2d_02">
+            <summary>2D · Cloth, recording 2</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/transfer/2d_02.jpg" aria-label="2D · Cloth, recording 2 · synchronized future prediction"><source src="assets/transfer/2d_02.mp4" type="video/mp4"></video>
+              <figcaption><span>2D · Cloth, recording 2</span><span>Future frames 241–410 · Camera 0</span><a href="assets/transfer/2d_02.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="bear_02">
+            <summary>3D · Plush, recording 1</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/transfer/bear_02.jpg" aria-label="3D · Plush, recording 1 · synchronized future prediction"><source src="assets/transfer/bear_02.mp4" type="video/mp4"></video>
+              <figcaption><span>3D · Plush, recording 1</span><span>Future frames 286–599 · Camera 0</span><a href="assets/transfer/bear_02.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+          <details class="clip" data-clip="bear_03" open>
+            <summary>3D · Plush, recording 2</summary>
+            <figure>
+              <video controls playsinline preload="none" width="1440" height="298"
+                poster="assets/transfer/bear_03.jpg" aria-label="3D · Plush, recording 2 · synchronized future prediction"><source src="assets/transfer/bear_03.mp4" type="video/mp4"></video>
+              <figcaption><span>3D · Plush, recording 2</span><span>Future frames 203–351 · Camera 0</span><a href="assets/transfer/bear_03.mp4">Open video</a></figcaption>
+            </figure>
+          </details>
+      </div>
+      <p class="note">Videos show only the future segment. All panels share the recorded background at 30% strength, with the reference object removed before compositing. Image scores use the original renders.</p>
+    </section>
+
+    <section id="metrics" class="section results wrap">
+      <div class="section-title"><h2>Per-recording results</h2></div>
+      <p>Future-segment means over the scored frames. CD and Track use millimeters. Image metrics use camera 0 and the PhysTwin full-image scoring protocol.</p>
+      <div class="table-scroll" role="region" aria-label="PhysCoRe benchmark · 12 scenes" tabindex="0"><table><caption>PhysCoRe benchmark · 12 scenes</caption><thead><tr><th scope="col">Recording</th><th scope="col">Method</th><th scope="col">CD ↓ (mm)</th><th scope="col">Track ↓ (mm)</th><th scope="col">IoU ↑ (%)</th><th scope="col">PSNR ↑ (dB)</th><th scope="col">SSIM ↑</th><th scope="col">LPIPS ↓</th></tr></thead><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Rope · Center lift</th><th scope="row">PhysCoRe</th><td>5.08</td><td>17.09</td><td>56.32</td><td>31.08</td><td>0.9890</td><td>0.0135</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>7.27</td><td>16.49</td><td>52.83</td><td>31.42</td><td>0.9898</td><td>0.0164</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>5.52</td><td>16.90</td><td>47.88</td><td>31.81</td><td>0.9894</td><td>0.0123</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Rope · End lift</th><th scope="row">PhysCoRe</th><td>3.30</td><td>12.41</td><td>71.60</td><td>32.47</td><td>0.9910</td><td>0.0102</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>4.27</td><td>14.01</td><td>61.20</td><td>31.24</td><td>0.9893</td><td>0.0127</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>6.95</td><td>19.15</td><td>48.19</td><td>32.64</td><td>0.9892</td><td>0.0117</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Rope · Push</th><th scope="row">PhysCoRe</th><td>5.33</td><td>28.79</td><td>50.19</td><td>29.60</td><td>0.9895</td><td>0.0158</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>12.78</td><td>44.62</td><td>27.67</td><td>27.82</td><td>0.9880</td><td>0.0221</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>3.56</td><td>20.86</td><td>70.71</td><td>34.45</td><td>0.9928</td><td>0.0079</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Rope · Fold</th><th scope="row">PhysCoRe</th><td>6.19</td><td>23.54</td><td>50.32</td><td>28.27</td><td>0.9832</td><td>0.0178</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>3.01</td><td>10.17</td><td>62.92</td><td>30.78</td><td>0.9859</td><td>0.0169</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>5.26</td><td>22.12</td><td>51.72</td><td>29.35</td><td>0.9854</td><td>0.0146</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Cloth · Center lift</th><th scope="row">PhysCoRe</th><td>18.92</td><td>47.77</td><td>62.03</td><td>21.52</td><td>0.9518</td><td>0.0590</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>13.62</td><td>38.31</td><td>60.18</td><td>21.75</td><td>0.9494</td><td>0.0627</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>16.35</td><td>42.62</td><td>73.92</td><td>23.71</td><td>0.9617</td><td>0.0458</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Cloth · One-corner lift</th><th scope="row">PhysCoRe</th><td>9.42</td><td>20.78</td><td>80.31</td><td>22.93</td><td>0.9622</td><td>0.0359</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>7.84</td><td>19.95</td><td>80.63</td><td>23.55</td><td>0.9661</td><td>0.0376</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>7.36</td><td>20.89</td><td>92.72</td><td>25.93</td><td>0.9649</td><td>0.0275</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Cloth · Two-corner lift</th><th scope="row">PhysCoRe</th><td>14.29</td><td>25.17</td><td>89.44</td><td>21.87</td><td>0.9489</td><td>0.0414</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>8.05</td><td>18.04</td><td>89.92</td><td>22.26</td><td>0.9381</td><td>0.0415</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>9.80</td><td>22.16</td><td>91.97</td><td>24.44</td><td>0.9492</td><td>0.0396</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Plush bear · One-limb lift</th><th scope="row">PhysCoRe</th><td>6.49</td><td>30.71</td><td>76.00</td><td>26.49</td><td>0.9197</td><td>0.0689</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>7.14</td><td>27.03</td><td>75.79</td><td>26.71</td><td>0.9180</td><td>0.0630</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>5.13</td><td>21.16</td><td>80.70</td><td>28.20</td><td>0.9343</td><td>0.0529</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Plush bear · Stretch, recording 1</th><th scope="row">PhysCoRe</th><td>5.20</td><td>12.58</td><td>87.09</td><td>28.52</td><td>0.9108</td><td>0.0320</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>6.01</td><td>15.57</td><td>86.78</td><td>28.61</td><td>0.9095</td><td>0.0376</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>3.81</td><td>8.88</td><td>91.09</td><td>30.72</td><td>0.9297</td><td>0.0454</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Plush bear · Stretch, recording 2</th><th scope="row">PhysCoRe</th><td>5.98</td><td>25.16</td><td>78.80</td><td>27.32</td><td>0.9253</td><td>0.0471</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>4.81</td><td>13.59</td><td>85.18</td><td>28.99</td><td>0.9320</td><td>0.0303</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>4.12</td><td>9.92</td><td>83.87</td><td>29.63</td><td>0.9385</td><td>0.0445</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Plasticine · Squeeze</th><th scope="row">PhysCoRe</th><td>10.56</td><td>13.71</td><td>77.48</td><td>34.80</td><td>0.9955</td><td>0.0053</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>5.07</td><td>12.92</td><td>73.35</td><td>37.90</td><td>0.9961</td><td>0.0099</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>10.56</td><td>13.71</td><td>75.50</td><td>34.70</td><td>0.9948</td><td>0.0058</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="3">Plasticine · Stretch</th><th scope="row">PhysCoRe</th><td>3.75</td><td>19.90</td><td>75.60</td><td>36.42</td><td>0.9961</td><td>0.0079</td></tr><tr class="PhysTwin"><th scope="row">PhysTwin</th><td>3.41</td><td>8.96</td><td>70.62</td><td>36.62</td><td>0.9962</td><td>0.0095</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>3.66</td><td>13.60</td><td>74.30</td><td>37.30</td><td>0.9964</td><td>0.0054</td></tr></tbody></table></div>
+      <p class="download"><a href="assets/benchmark-future.csv">Download benchmark CSV</a></p>
+      <div class="table-scroll" role="region" aria-label="Self-collected transfer · 6 recordings" tabindex="0"><table><caption>Self-collected transfer · 6 recordings</caption><thead><tr><th scope="col">Recording</th><th scope="col">Method</th><th scope="col">CD ↓ (mm)</th><th scope="col">Track ↓ (mm)</th><th scope="col">IoU ↑ (%)</th><th scope="col">PSNR ↑ (dB)</th></tr></thead><tbody><tr class="author"><th scope="rowgroup" rowspan="2">1D · Rope push</th><th scope="row">PhysCoRe (adapted)</th><td>14.10</td><td>45.29</td><td>—</td><td>—</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>13.80</td><td>46.84</td><td>19.85</td><td>26.07</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="2">1D · Rope lift</th><th scope="row">PhysCoRe (adapted)</th><td>15.87</td><td>56.08</td><td>—</td><td>—</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>15.07</td><td>43.47</td><td>11.31</td><td>27.93</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="2">2D · Cloth, recording 1</th><th scope="row">PhysCoRe (adapted)</th><td>49.20</td><td>98.87</td><td>—</td><td>—</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>40.96</td><td>101.08</td><td>35.86</td><td>15.16</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="2">2D · Cloth, recording 2</th><th scope="row">PhysCoRe (adapted)</th><td>30.75</td><td>65.63</td><td>—</td><td>—</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>16.84</td><td>51.17</td><td>77.79</td><td>19.25</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="2">3D · Plush, recording 1</th><th scope="row">PhysCoRe (adapted)</th><td>16.88</td><td>58.39</td><td>—</td><td>—</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>15.68</td><td>47.54</td><td>61.85</td><td>20.64</td></tr></tbody><tbody><tr class="author"><th scope="rowgroup" rowspan="2">3D · Plush, recording 2</th><th scope="row">PhysCoRe (adapted)</th><td>9.89</td><td>38.95</td><td>—</td><td>—</td></tr><tr class="ours"><th scope="row">DeformForward</th><td>10.41</td><td>43.33</td><td>65.55</td><td>23.73</td></tr></tbody></table></div>
+      <p class="download"><a href="assets/transfer-future.csv">Download transfer CSV</a></p>
+      <p class="note">On self-collected recordings, both physics methods use adapted input preprocessing, including manual verification of sparse observations and contact cues. PhysCoRe is scored on geometry. IoU and PSNR are reported for DeformForward’s Gaussian renders.</p>
+    </section>
+  </main>
+
+  <footer class="wrap">DeformForward · Anonymous supplementary material</footer>
+</body>
+</html>
